@@ -37,7 +37,7 @@ En la terminal debe aparecer los siguientes paquetes:
 <img src="./Logos/Turtle%20pkgs.png" height="100">
 </p>
 
-## Nodo
+## Actividad de Nodos 
 Los nodos son las unidades básicas de ejecución en ROS y cada uno se encarga de una tarea específica, como controlar un sensor, realizar cálculos, procesar datos, o controlar actuadores.
   
 Ejecutar el simulador Turtlesim en la terminal:
@@ -119,7 +119,7 @@ ros2 action list
 </p>
 
 Ejecutar rqt y abrir plugins (Dynamic Reconfigure, topic monitor, Matplot):
-En el servicio de service caller, anexe una nueva tortuga "turtle2" en las cordenadas x,y (1,1)
+En el servicio de service caller, anexe una nueva tortuga "turtle2" en las cordenadas x,y (1,1), para rear la tortug ¨turtle2¨
 
 ```bash
 rqt
@@ -132,14 +132,26 @@ rqt
 <img src="./Logos/Plugins.png" height="500">
 </p>
 
-
-
-```bash
-rqt_graph
-```
+Para transmtir la informacion de turtle 1 a  turtle2
 ```bash
 ros2 run turtlesim turtle_teleop_key --ros-args --remap turtle1/cmd_vel:=turtle2/cmd_vel
 ```
+Creamos una ueva tortuga llamada turtle 3 En el mismo rqt en seguida se pasa la información de turtle 1 a turtle 3
+Para transmtir la informacion de turtle 1 a  turtle3
+```bash
+ros2 run turtlesim turtle_teleop_key --ros-args --remap turtle1/cmd_vel:=turtle3/cmd_vel
+```
+Para sguir un trayectoria circular para la tortuga 3 
+```bash
+ros2 topic pub --rate 1 /turtle3/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,  y: 0.0, z: 1.8}}"
+```
+para obtener el grafico dinamico del sistema 
+```bash
+rqt_graph
+```
+
+
+
 ```bash
 ros2 topic info /turtle2/cmd_vel
 ```
